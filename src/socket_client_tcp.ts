@@ -24,7 +24,8 @@ class SocketClient {
       case "tls":
       case "ssl":
         conn = new tls.TLSSocket(conn, {
-          isServer: false
+          isServer: false,
+          ...options
         });
         break;
       default:
