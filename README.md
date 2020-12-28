@@ -10,6 +10,9 @@ Just establish a connection to the websockets URL and start sending messages.
 
 Example: `localhost:8080/tcp/electrum.blockstream.info/50001/ignore`
 
+## Electrum servers
+A list of public electrum servers is available at https://1209k.com/bitcoin-eye/ele.php?chain=btc
+
 ## Hosting your own
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
