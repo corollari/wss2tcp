@@ -1,0 +1,5 @@
+{
+  "name": "wss2tcp proxy",
+  "description": "wss to tcp connection proxy to be used to connect to public Electrum servers",
+  "repository": "https://github.com/corollari/wss2tcp"
+}
