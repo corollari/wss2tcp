@@ -6,7 +6,7 @@ const { MessageParser } = require("./utils");
 const port = Number(process.env.PORT ?? "8080");
 const wss = new WebSocket.Server({ port });
 
-wss.on("connection", function connection(ws, req) {
+wss.on("connection", (ws, req) => {
   console.log(req.url);
   if (req.url === undefined) {
     throw new Error("No url");
@@ -18,12 +18,18 @@ wss.on("connection", function connection(ws, req) {
   const socket = new SocketClient(
     {
       onConnect: () => {},
-      onClose: ws.onclose,
+      onClose: (...args:any[])=>{
+        console.log("Connection close", args);
+        ws.close();
+      },
       onRecv: (chunk: any) => {
         mp.run(chunk);
       },
       onEnd: () => {},
-      onError: ws.onerror,
+      onError: (...args:any[])=>{
+        console.log("Connection error", args);
+        ws.close()
+      },
     },
     host,
     Number(port),

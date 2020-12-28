@@ -1,4 +1,5 @@
 import net from "net";
+import tls from 'tls'
 
 const TIMEOUT = 10000;
 
@@ -16,20 +17,15 @@ class SocketClient {
     protocol: string,
     options: any
   ) {
-    let conn: net.Socket;
+    let conn = new net.Socket();
     switch (protocol) {
       case "tcp":
-        conn = new net.Socket();
         break;
       case "tls":
       case "ssl":
-        let tls;
-        try {
-          tls = require("tls");
-        } catch (e) {
-          throw new Error("tls package could not be loaded");
-        }
-        conn = new tls.TLSSocket(options);
+        conn = new tls.TLSSocket(conn, {
+          isServer: false
+        });
         break;
       default:
         throw new Error(`not supported protocol ${protocol}`);
